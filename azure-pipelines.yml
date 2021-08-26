@@ -10,12 +10,12 @@ pool:
   vmImage: ubuntu-latest
 strategy:
   matrix:
-   # Python27:
-   #   python.version: '2.7'
-   # Python35:
-   #   python.version: '3.5'
-   # Python36:
-   #   python.version: '3.6'
+    Python27:
+      python.version: '2.7'
+    Python35:
+      python.version: '3.5'
+    Python36:
+      python.version: '3.6'
     Python37:
       python.version: '3.7'
 
@@ -55,4 +55,19 @@ steps:
     flake8 .
   displayName: 'Run lint tests'
 
+- script: pip install tox
+  displayName: 'Install Tox'
 
+- script: tox -e py
+  displayName: 'Run Tox'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFiles: '**/test-*.xml'
+    testRunTitle: 'Publish test results for Python $(python.version'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: : '$(System.DefaultWorkingDirectoy)/**/coverage.xml'
