@@ -6,57 +6,75 @@
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
-strategy:
-  matrix:
-    Python27:
-      python.version: '2.7'
-    Python35:
-      python.version: '3.5'
-    Python36:
-      python.version: '3.6'
-    Python37:
-      python.version: '3.7'
+stages:
+- stage: 'Prepare'
+  jobs:
+  - job:
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      matrix:
+        Python27:
+          python.version: '2.7'
+        Python35:
+          python.version: '3.5'
+        Python36:
+          python.version: '3.6'
+        Python37:
+          python.version: '3.7'
 
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '$(python.version)'
+      displayName: 'Use Python $(python.version)'
 
-- task: PythonScript@0
-  inputs:
-    scriptSource: 'inline'
-    script: |
-      import sys
-      print ('Executing script files is', str(sys.argv[0]))
-      print ('The arguments are:', str(sys.argv))
-      import argparse
-      parser = argparse.ArgumentParser()
-      parser.add_argument("--world", help="Provide the name of the world to greet.")
-      args = parser.parse_args()
-      print ('Hello ', args.world)
-    arguments: --world Venus
+    - task: PythonScript@0
+      inputs:
+        scriptSource: 'inline'
+        script: |
+          import sys
+          print ('Executing script files is', str(sys.argv[0]))
+          print ('The arguments are:', str(sys.argv))
+          import argparse
+          parser = argparse.ArgumentParser()
+          parser.add_argument("--world", help="Provide the name of the world to greet.")
+          args = parser.parse_args()
+          print ('Hello ', args.world)
+        arguments: --world Venus
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+    - script: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+      displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pip install pytest-cov
-    pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml
-  displayName: 'pytest'
+    - script: |
+        pip install pytest pytest-azurepipelines
+        pip install pytest-cov
+        pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml
+      displayName: 'pytest'
 
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testResultsFiles: '**/test-*.xml'
-    testRunTitle: 'Publish test results for Python $(python.version'
+    - task: PublishTestResults@2
+      condition: succeededOrFailed()
+      inputs:
+        testResultsFiles: '**/test-*.xml'
+        testRunTitle: 'Publish test results for Python $(python.version'
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(System.DefaultWorkingDirectoy)/**/coverage.xml'
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: Cobertura
+        summaryFileLocation: '$(System.DefaultWorkingDirectoy)/**/coverage.xml'
+
+- stage: deploy
+  jobs:
+  - deployment: DeployWeb
+    displayName: deploy Web App
+    pool:
+      vmImage: 'Ubuntu-latest'
+    # creates an environment if it doesn't exist
+    environment: 'smarthotel-dev'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo Hello world
