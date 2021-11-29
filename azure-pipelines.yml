@@ -6,31 +6,36 @@
 trigger:
 - master
 
-variables:
-  a: {key1: "Hello", key2: "World"}
-pool:
-  vmImage: ubuntu-latest
-strategy:
-  matrix:
-    Python37:
-      python.version: '3.7'
+# variables:
+#   a: {key1: "Hello", key2: "World"}
 
 steps:
 - script: |
-    echo $(a)
+    echo Hi
   displayName: 'variable_test'
+# pool:
+#   vmImage: ubuntu-latest
+# strategy:
+#   matrix:
+#     Python37:
+#       python.version: '3.7'
 
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+# steps:
+# - script: |
+#     echo $(a)
+#   displayName: 'variable_test'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+# - task: UsePythonVersion@0
+#   inputs:
+#     versionSpec: '$(python.version)'
+#   displayName: 'Use Python $(python.version)'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+# - script: |
+#     python -m pip install --upgrade pip
+#     pip install -r requirements.txt
+#   displayName: 'Install dependencies'
+
+# - script: |
+#     pip install pytest pytest-azurepipelines
+#     pytest
+#   displayName: 'pytest'
