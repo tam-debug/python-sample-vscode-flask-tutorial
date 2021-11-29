@@ -18,7 +18,7 @@ stages:
     jobs:
       - deployment: 
         displayName: Deployment one
-        environment: $(words)
+        environment: ${{ variables.words }}
       - template: dummy_template.yml
         parameters:
           p1: $(words)
