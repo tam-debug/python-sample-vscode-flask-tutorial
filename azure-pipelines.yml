@@ -18,7 +18,7 @@ stages:
     jobs:
       - template: dummy_template.yml
         parameters:
-          p1: Apples and Oranges
+          p1: $(statement)
       - job: my_first_job
         displayName: My First Job
         steps:
