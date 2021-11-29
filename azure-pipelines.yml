@@ -23,7 +23,7 @@ stages:
         displayName: My First Job
         steps:
         - script: |
-            echo $(environment) is $(var1)
+            "echo $(environment) is $(var1)"
           displayName: 'step_1'
         - script: echo $(var2)
           displayName: 'step_2'
