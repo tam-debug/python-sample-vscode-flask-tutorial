@@ -1,4 +1,4 @@
 variables:
   words: 'Test'
-  colour: 'Magenta'
-  anima: 'Turtle'
+  colour: 'Cyan'
+  anima: 'Rabbit'
