@@ -4,9 +4,10 @@ parameters:
   default: Sandbox
 
 jobs:
-  - job: template_j2
-      steps:
-      - script: echo ${{ parameters.environment }}
   - deployment:
     displayName: "Template Deployment"
     environment: '${{ parameters.environment }}'
+  
+  - job: test_job
+    displayName: "Testing Jobs"
+    script: 'echo ${{ parameters.environment }}'
