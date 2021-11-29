@@ -22,9 +22,10 @@ stages:
       - job: my_first_job
         displayName: My First Job
         steps:
-        - script: |
-            "echo $(environment) is $(var1)"
+        - task: CmdLine@2
           displayName: 'step_1'
+          inputs:
+            script: 'echo $(environment) $(var1)' 
         - script: echo $(var2)
           displayName: 'step_2'
 
