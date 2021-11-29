@@ -48,9 +48,9 @@ stages:
         displayName: My Second Job
         steps:
         - script: |
-            echo $(words) Sky
+            echo Blue Sky
           displayName: 'step_1'
-        - script: echo The environment is $(words)
+        - script: echo The environment is Green
           displayName: 'step_2'
         - script: echo $(song) is a hit!
           displayName: 'step_3'
