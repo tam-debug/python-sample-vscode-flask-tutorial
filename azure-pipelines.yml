@@ -13,16 +13,15 @@ stages:
   - stage: s_1
     displayName: Stage 1
     variables: 
-      environment: Green
-      template: dummy_variables2.yml
+      - template: dummy_variables2.yml
         
     jobs:
       - deployment: 
         displayName: First Deployment
-        environment: 'Support'
+        environment: $(anima)
       - template: dummy_template.yml
         parameters:
-          p1: $(environment)
+          p1: $(words)
       - job: my_first_job
         displayName: My First Job
         steps:
@@ -30,7 +29,7 @@ stages:
           displayName: 'step_1'
           inputs:
             script: 'echo $(words)' 
-        - script: echo $(statement) $(environment)
+        - script: echo $(statement) $(words)
           displayName: 'step_2'
 
   - stage: s_2
