@@ -17,7 +17,7 @@ stages:
         
     jobs:
       - deployment: 
-        displayName: First Deployment
+        displayName: Deployment one
         environment: $(words)
       - template: dummy_template.yml
         parameters:
