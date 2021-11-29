@@ -28,7 +28,7 @@ stages:
         - task: CmdLine@2
           displayName: 'step_1'
           inputs:
-            script: $(colour) $(anima) $(words) Sky
+            script: 'echo $(colour) $(anima) $(words) Sky'
         - script: echo $(statement) $(words)
           displayName: 'step_2'
 
