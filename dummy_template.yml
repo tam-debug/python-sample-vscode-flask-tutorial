@@ -3,5 +3,7 @@ parameters:
   type: string
   default: random default value
 
-steps:
-- script: echo ${{ parameters.p1 }}
+jobs:
+  - job: template_j1
+    steps:
+    - script: echo ${{ parameters.p1 }}
