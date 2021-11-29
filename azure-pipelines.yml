@@ -16,9 +16,9 @@ stages:
       - template: dummy_variables2.yml
         
     jobs:
-      - deployment: 
-        displayName: First Deployment
-        environment: $(words)
+      # - deployment: 
+      #   displayName: First Deployment
+      #   environment: $(words)
       - template: dummy_template.yml
         parameters:
           p1: $(words)
