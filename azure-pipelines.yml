@@ -9,6 +9,8 @@ trigger:
 stages:
   - stage: s_1
     displayName: Stage 1
+    variables: 
+      environment: Green
     
     jobs:
       - template: dummy_template.yml
@@ -18,5 +20,5 @@ stages:
         displayName: My First Job
         steps:
         - script: |
-            echo ${{ stage }}
+            echo $(environment)
           displayName: 'step_1'
