@@ -7,3 +7,6 @@ jobs:
   - deployment:
     displayName: "Template Deployment"
     environment: '${{ parameters.environment }}'
+  - job: template_j2
+      steps:
+      - script: echo ${{ parameters.environment }}
