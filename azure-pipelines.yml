@@ -6,6 +6,9 @@
 trigger:
 - master
 
+variables:
+  - template: dummy_variables.yml
+
 stages:
   - stage: s_1
     displayName: Stage 1
@@ -22,6 +25,8 @@ stages:
         - script: |
             echo $(environment)
           displayName: 'step_1'
+        - script: echo $(var2)
+          displayName: 'step_2'
 
   - stage: s_2
     displayName: Stage 2
@@ -40,3 +45,5 @@ stages:
           displayName: 'step_1'
         - script: echo The environment is $(environment)
           displayName: 'step_2'
+        - script: echo $(var1) $(environment)
+          displayName: 'step_3'
