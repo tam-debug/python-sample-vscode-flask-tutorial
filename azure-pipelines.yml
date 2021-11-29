@@ -18,5 +18,5 @@ stages:
         displayName: My First Job
         steps:
         - script: |
-            echo Hello, World
+            echo $(p1)
           displayName: 'step_1'
