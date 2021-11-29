@@ -1,0 +1,4 @@
+variables:
+  words: 'Test'
+  colour: 'Magenta'
+  anima: 'Turtle'
