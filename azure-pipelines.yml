@@ -14,7 +14,8 @@ stages:
     displayName: Stage 1
     variables: 
       environment: Green
-    
+      template: dummy_variables2.yml
+        
     jobs:
       - template: dummy_template.yml
         parameters:
@@ -25,7 +26,7 @@ stages:
         - task: CmdLine@2
           displayName: 'step_1'
           inputs:
-            script: 'echo $(environment) $(environment)' 
+            script: 'echo $(words)' 
         - script: echo $(statement) $(environment)
           displayName: 'step_2'
 
