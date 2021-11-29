@@ -26,7 +26,7 @@ stages:
           displayName: 'step_1'
           inputs:
             script: 'echo $(environment) $(environment)' 
-        - script: echo $(statement)
+        - script: echo $(statement) $(environment)
           displayName: 'step_2'
 
   - stage: s_2
@@ -46,5 +46,5 @@ stages:
           displayName: 'step_1'
         - script: echo The environment is $(environment)
           displayName: 'step_2'
-        - script: echo $(song)
+        - script: echo $(song) is a hit!
           displayName: 'step_3'
