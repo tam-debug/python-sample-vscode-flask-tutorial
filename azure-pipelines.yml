@@ -18,5 +18,5 @@ stages:
         displayName: My First Job
         steps:
         - script: |
-            echo $(p1)
+            echo ${{ parameters.p1 }}
           displayName: 'step_1'
