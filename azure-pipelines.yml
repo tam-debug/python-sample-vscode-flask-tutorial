@@ -25,7 +25,7 @@ stages:
         - task: CmdLine@2
           displayName: 'step_1'
           inputs:
-            script: 'echo $(environment) $(var1)' 
+            script: 'echo $(environment) $(environment)' 
         - script: echo $(var2)
           displayName: 'step_2'
 
