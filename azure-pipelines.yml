@@ -35,9 +35,12 @@ stages:
   - stage: s_2
     displayName: Stage 2
     variables: 
-      environment: Blue
+      -template: dummy_variables3.yml
     
     jobs:
+      - deployment: 
+        displayName: Deployment Two
+        environment: ${{ variables.words }}
       - template: dummy_template.yml
         parameters:
           p1: Lychees and Raspberries are the best
@@ -45,9 +48,9 @@ stages:
         displayName: My Second Job
         steps:
         - script: |
-            echo $(environment) Sky
+            echo $(words) Sky
           displayName: 'step_1'
-        - script: echo The environment is $(environment)
+        - script: echo The environment is $(words)
           displayName: 'step_2'
         - script: echo $(song) is a hit!
           displayName: 'step_3'
