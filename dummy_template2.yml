@@ -1,0 +1,9 @@
+parameters:
+- name: environment
+  type: string
+  default: Sandbox
+
+jobs:
+  - deployment:
+    displayName: "Template Deployment"
+    environment: '${{ parameters.environment }}'
