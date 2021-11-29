@@ -10,4 +10,5 @@ jobs:
   
   - job: test_job
     displayName: "Testing Jobs"
-    script: 'echo ${{ parameters.environment }}'
+    steps:
+    - script: echo ${{ parameters.environment }}
