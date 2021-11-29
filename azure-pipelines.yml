@@ -28,7 +28,7 @@ stages:
         - task: CmdLine@2
           displayName: 'step_1'
           inputs:
-            script: 'echo $(words)' 
+            script: $(colour) $(anima) $(words) Sky
         - script: echo $(statement) $(words)
           displayName: 'step_2'
 
@@ -48,7 +48,7 @@ stages:
         displayName: My Second Job
         steps:
         - script: |
-            echo $(words) Sky
+            echo $(colour) $(anima) $(words) Sky
           displayName: 'step_1'
         - script: echo The environment is $(words)
           displayName: 'step_2'
