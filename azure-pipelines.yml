@@ -22,3 +22,21 @@ stages:
         - script: |
             echo $(environment)
           displayName: 'step_1'
+
+  - stage: s_2
+    displayName: Stage 2
+    variables: 
+      environment: Blue
+    
+    jobs:
+      - template: dummy_template.yml
+        parameters:
+          p1: Lychees and Raspberries are the best
+      - job: my_second_job
+        displayName: My Second Job
+        steps:
+        - script: |
+            echo $(environment) Sky
+          displayName: 'step_1'
+        - script: echo The environment is $(environment)
+          displayName: 'step_2'
