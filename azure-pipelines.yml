@@ -17,7 +17,4 @@ stages:
       - job: my_first_job
         displayName: My First Job
         steps:
-        - task:
-          displayName: A random task
-          inputs:
-            script: 'echo Testing  1, 2, 3...'
+        - script: 'echo Testing 1, 2, 3...'
