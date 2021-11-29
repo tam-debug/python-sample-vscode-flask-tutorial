@@ -17,9 +17,12 @@ stages:
       template: dummy_variables2.yml
         
     jobs:
+      - deployment: 
+        displayName: First Deployment
+        environment: 'Support'
       - template: dummy_template.yml
         parameters:
-          p1: $(statement)
+          p1: $(environment)
       - job: my_first_job
         displayName: My First Job
         steps:
