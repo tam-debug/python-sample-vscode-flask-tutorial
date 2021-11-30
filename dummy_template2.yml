@@ -12,3 +12,5 @@ jobs:
     displayName: "Testing Jobs"
     steps:
     - script: echo ${{ parameters.environment }}
+    - script: echo The song is $(song)
+    - script: echo Cool $(anima)
