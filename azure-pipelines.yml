@@ -18,7 +18,7 @@ stages:
     jobs:
       - template: dummy_template2.yml
         parameters:
-          environment: ${{ variables.colour }}
+          environment: $(colour)
       - template: dummy_template.yml
         parameters:
           p1: $(words)
