@@ -17,6 +17,10 @@ strategy:
 
 steps:
 - script: |
+    echo "Build.SourceBranch: $(Build.SourceBranch)"
+  displayName: 'variable_test'
+
+- script: |
     echo $(a)
   displayName: 'variable_test'
 
