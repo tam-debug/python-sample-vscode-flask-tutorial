@@ -6,8 +6,6 @@
 trigger:
 - master
 
-variables:
-  a: {key1: "Hello", key2: "World"}
 pool:
   vmImage: ubuntu-latest
 strategy:
@@ -18,10 +16,6 @@ strategy:
 steps:
 - script: |
     echo "Build.SourceBranch: $(Build.SourceBranch)"
-  displayName: 'variable_test'
-
-- script: |
-    echo $(a)
   displayName: 'variable_test'
 
 - task: UsePythonVersion@0
