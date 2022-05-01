@@ -15,7 +15,7 @@ strategy:
 
 steps:
 - script: |
-    echo "Build.SourceBranch: $(Build.SourceBranch)"
+    echo "Build.SourceVersion: $(Build.SourceVersion)"
   displayName: 'variable_test'
 
 - task: UsePythonVersion@0
