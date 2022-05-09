@@ -6,6 +6,20 @@
 trigger:
 - master
 
+parameters:
+  - name: ProjectKey
+    displayName: Project Key
+    type: string
+    default: 1999_09_V1_BlahBlahA
+  - name: ProjectName
+    displayName: Project Name
+    type: string
+    default: Disco Labs
+  - name: VersionId
+    displayName: Version Number (e.g "v1")
+    type: string
+    default: v2
+
 pool:
   vmImage: ubuntu-latest
 strategy:
@@ -15,7 +29,7 @@ strategy:
 
 steps:
 - script: |
-    echo "Build.SourceVersion: $(Build.SourceVersion)"
+    echo "${{ parameters.ProjectKey }} ${{ parameters.ProjectName }}"
   displayName: 'variable_test'
 
 - task: UsePythonVersion@0
