@@ -6,19 +6,19 @@
 trigger:
 - master
 
-parameters:
-  - name: ProjectKey
-    displayName: Project Key
-    type: string
-    default: 1999_09_V1_BlahBlahA
-  - name: ProjectName
-    displayName: Project Name
-    type: string
-    default: Disco Labs
-  - name: VersionId
-    displayName: Version Number (e.g "v1")
-    type: string
-    default: v2
+# parameters:
+#   - name: ProjectKey
+#     displayName: Project Key
+#     type: string
+#     default: 1999_09_V1_BlahBlahA
+#   - name: ProjectName
+#     displayName: Project Name
+#     type: string
+#     default: Disco Labs
+#   - name: VersionId
+#     displayName: Version Number (e.g "v1")
+#     type: string
+#     default: v2
 
 pool:
   vmImage: ubuntu-latest
@@ -27,22 +27,43 @@ strategy:
     Python37:
       python.version: '3.7'
 
-steps:
-- script: |
-    echo "${{ parameters.ProjectKey }} ${{ parameters.ProjectName }}"
-  displayName: 'variable_test'
+stages:
+  - stage: Stage_1
+    displayName: Stage 1
+    jobs:
+    - deployment: Approval_Please
+      displayName: Stage 1 Approval
+    - job: Stage_1_Job
+      displayName: a job
+      dependsOn: Approval_Please
+      steps:
+        - script: echo "This is stage 1"
+  - stage: Stage_2
+    displayName: Stage 2
+    jobs:
+    - deployment: Approval_Please_2
+      displayName: Stage 2 Approval
+    - job: Stage_2_Job
+      displayName: a job
+      dependsOn: Approval_Please_2
+      steps:
+        - script: echo "This is stage 2"
+# steps:
+# # - script: |
+# #     echo "${{ parameters.ProjectKey }} ${{ parameters.ProjectName }}"
+# #   displayName: 'variable_test'
 
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-  displayName: 'Use Python $(python.version)'
+# - task: UsePythonVersion@0
+#   inputs:
+#     versionSpec: '$(python.version)'
+#   displayName: 'Use Python $(python.version)'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+# - script: |
+#     python -m pip install --upgrade pip
+#     pip install -r requirements.txt
+#   displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+# - script: |
+#     pip install pytest pytest-azurepipelines
+#     pytest
+#   displayName: 'pytest'
