@@ -46,6 +46,8 @@ stages:
         - script: echo "This is stage 1"
   - stage: Stage_2
     displayName: Stage 2
+    pool:
+      vmImage: ubuntu-latest
     jobs:
     - deployment: Approval_Please_2
       displayName: Stage 2 Approval
