@@ -39,6 +39,7 @@ stages:
     jobs:
     - deployment: Approval_Please
       displayName: Stage 1 Approval
+      environment: env1
     - job: Stage_1_Job
       displayName: a job
       dependsOn: Approval_Please
@@ -51,6 +52,7 @@ stages:
     jobs:
     - deployment: Approval_Please_2
       displayName: Stage 2 Approval
+      environment: env2
     - job: Stage_2_Job
       displayName: a job
       dependsOn: Approval_Please_2
