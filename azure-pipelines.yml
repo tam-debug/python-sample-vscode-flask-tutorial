@@ -31,11 +31,11 @@ stages:
   - stage: Stage_1
     displayName: Stage 1
     pool:
-    vmImage: ubuntu-latest
-    strategy:
-      matrix:
-        Python37:
-          python.version: '3.7'
+      vmImage: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     Python37:
+    #       python.version: '3.7'
     jobs:
     - deployment: Approval_Please
       displayName: Stage 1 Approval
