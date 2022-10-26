@@ -27,7 +27,7 @@ parameters:
   - name: fruits
     displayName: Fruits
     type: string
-    default: $(fruits)
+    default: ${{ variables.fruits }}
 
 # pool:
 #   vmImage: ubuntu-latest
