@@ -7,7 +7,7 @@ trigger:
 - master
 
 variables:
-  fruits: Apples
+  fruits: ${{ "Apples" }}
 
 parameters:
   - name: ProjectKey
