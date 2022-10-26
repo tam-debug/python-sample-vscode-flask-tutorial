@@ -6,19 +6,26 @@
 trigger:
 - master
 
-# parameters:
-#   - name: ProjectKey
-#     displayName: Project Key
-#     type: string
-#     default: 1999_09_V1_BlahBlahA
-#   - name: ProjectName
-#     displayName: Project Name
-#     type: string
-#     default: Disco Labs
-#   - name: VersionId
-#     displayName: Version Number (e.g "v1")
-#     type: string
-#     default: v2
+variables:
+  fruits: ["Apple", "Orange"]
+
+parameters:
+  - name: ProjectKey
+    displayName: Project Key
+    type: string
+    default: 1999_09_V1_BlahBlahA
+  - name: ProjectName
+    displayName: Project Name
+    type: string
+    default: Disco Labs
+  - name: VersionId
+    displayName: Version Number (e.g "v1")
+    type: string
+    default: v2
+  - name: fruits
+    displayName: Fruits
+    type: string
+    default: ${{ variables.fruits }}
 
 # pool:
 #   vmImage: ubuntu-latest
