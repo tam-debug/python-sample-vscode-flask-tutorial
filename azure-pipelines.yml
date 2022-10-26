@@ -23,10 +23,15 @@ parameters:
     displayName: Version Number (e.g "v1")
     type: string
     default: v2
-  - name: whichKey
-    displayName: Which Key
-    type: string
-    default: key1
+  - name: Param
+    displayName: Param
+    type: object
+    default:
+    - name: 'john'
+      email: 'john@doe.com'
+    - name: 'jane'
+      email: 'jane@doe.com'
+    - bob
 
 # pool:
 #   vmImage: ubuntu-latest
@@ -52,7 +57,7 @@ stages:
       displayName: a job
       dependsOn: Approval_Please
       steps:
-        - script: echo "This is stage 1 ${{ variables[${{ parameters.whichKey }}] }}"
+        - script: echo "This is stage 1"
   - stage: Stage_2
     displayName: Stage 2
     pool:
