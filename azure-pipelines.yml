@@ -8,6 +8,8 @@ trigger:
 
 variables:
   fruits: ${{ "Apples" }}
+  key1:
+    key2: "Success"
 
 parameters:
   - name: ProjectKey
@@ -25,7 +27,7 @@ parameters:
   - name: fruits
     displayName: Fruits
     type: string
-    default: ${{ variables.fruits }}
+    default: $[fruits]
 
 # pool:
 #   vmImage: ubuntu-latest
