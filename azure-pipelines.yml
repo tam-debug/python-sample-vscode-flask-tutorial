@@ -27,7 +27,7 @@ parameters:
   - name: fruits
     displayName: Fruits
     type: string
-    default: $[fruits]
+    default: $[ fruits ]
 
 # pool:
 #   vmImage: ubuntu-latest
