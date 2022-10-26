@@ -7,9 +7,8 @@ trigger:
 - master
 
 variables:
-  fruits: ${{ "Apples" }}
-  key1:
-    key2: "Success"
+  key1: "Ok"
+  key2: "Right"
 
 parameters:
   - name: ProjectKey
@@ -24,10 +23,10 @@ parameters:
     displayName: Version Number (e.g "v1")
     type: string
     default: v2
-  - name: fruits
-    displayName: Fruits
+  - name: whichKey
+    displayName: Which Key
     type: string
-    default: $[ fruits ]
+    default: key1
 
 # pool:
 #   vmImage: ubuntu-latest
@@ -53,7 +52,7 @@ stages:
       displayName: a job
       dependsOn: Approval_Please
       steps:
-        - script: echo "This is stage 1"
+        - script: echo "This is stage 1 ${{ variables[${{ parameters.whichKey }}] }}"
   - stage: Stage_2
     displayName: Stage 2
     pool:
