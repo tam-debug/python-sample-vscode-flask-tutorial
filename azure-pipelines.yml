@@ -9,6 +9,7 @@ trigger:
 variables:
   key1: "Ok"
   key2: "Right"
+  key3: "Buzz"
 
 parameters:
   - name: ProjectKey
@@ -41,40 +42,70 @@ parameters:
 #       python.version: '3.7'
 
 stages:
-  - stage: Stage_1
-    displayName: Stage 1
-    pool:
-      vmImage: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     Python37:
-    #       python.version: '3.7'
-    jobs:
-    - deployment: Approval_Please
-      displayName: Stage 1 Approval
-      environment: env1
-    - job: Stage_1_Job
-      displayName: a job
-      dependsOn: Approval_Please
-      steps:
-        - script: echo "This is stage 1"
-  - stage: Stage_2
-    displayName: Stage 2
-    pool:
-      vmImage: ubuntu-latest
-    jobs:
-    - deployment: Approval_Please_2
-      displayName: Stage 2 Approval
-      environment: env2
-    - job: Stage_2_Job
-      displayName: a job
-      dependsOn: Approval_Please_2
-      steps:
-        - script: echo "This is stage 2"
+
+- stage: one
+  jobs:
+  - job: A
+    steps:
+    - bash: |
+       echo "##vso[task.setvariable variable=skipsubsequent;isOutput=true]hello world"
+      name: skipstep
+
+- stage: two
+  jobs:
+  - job: B
+    variables:
+      - name: skipMe
+        value: $[ stageDependencies.one.A.outputs['skipstep.skipsubsequent'] ]
+    steps:
+      - bash: echo $(skipMe)
+
+
+# stages:
+#   - stage: Stage_1
+#     displayName: Stage 1
+#     pool:
+#       vmImage: ubuntu-latest
+#     # strategy:
+#     #   matrix:
+#     #     Python37:
+#     #       python.version: '3.7'
+#     jobs:
+#     - deployment: Approval_Please
+#       displayName: Stage 1 Approval
+#       environment: env1
+#     - job: Stage_1_Job
+#       displayName: a job
+#       dependsOn: Approval_Please
+#       steps:
+#         - script: echo "This is stage 1"
+#   - stage: Stage_2
+#     displayName: Stage 2
+#     pool:
+#       vmImage: ubuntu-latest
+#     jobs:
+#     - deployment: Approval_Please_2
+#       displayName: Stage 2 Approval
+#       environment: env2
+#     - job: Stage_2_Job
+#       displayName: a job
+#       dependsOn: Approval_Please_2
+#       steps:
+#         - script: echo "This is stage 2"
 # steps:
-# # - script: |
-# #     echo "${{ parameters.ProjectKey }} ${{ parameters.ProjectName }}"
-# #   displayName: 'variable_test'
+# - script: |
+#     echo "${{ parameters.ProjectKey }} ${{ parameters.ProjectName }}"
+#   displayName: 'variable_test'
+
+# - task: PowerShell@2
+#   displayName: Loop Over Records
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       # first, get the records
+#       ForEach ($record in $records.Records) {
+#         # do something with $record
+#       }
 
 # - task: UsePythonVersion@0
 #   inputs:
