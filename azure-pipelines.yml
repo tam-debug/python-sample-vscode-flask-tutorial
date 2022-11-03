@@ -17,7 +17,7 @@ variables:
 parameters:
   - name: myParameter
     type: object
-    default:
+    values:
         name1: value1
         name2: value2
 
