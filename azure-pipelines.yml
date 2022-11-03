@@ -7,32 +7,36 @@ trigger:
 - master
 
 variables:
-  key1: "Ok"
-  key2: "Right"
-  key3: "Buzz"
+  - name: "A variable"
+    value: "Some value"
+  - template: "some template"
+  # key1: "Ok"
+  # key2: "Right"
+  # key3: "Buzz"
 
-parameters:
-  - name: ProjectKey
-    displayName: Project Key
-    type: string
-    default: 1999_09_V1_BlahBlahA
-  - name: ProjectName
-    displayName: Project Name
-    type: string
-    default: Disco Labs
-  - name: VersionId
-    displayName: Version Number (e.g "v1")
-    type: string
-    default: v2
-  - name: Param
-    displayName: Param
-    type: object
-    default:
-    - name: 'john'
-      email: 'john@doe.com'
-    - name: 'jane'
-      email: 'jane@doe.com'
-    - bob
+
+# parameters:
+#   - name: ProjectKey
+#     displayName: Project Key
+#     type: string
+#     default: 1999_09_V1_BlahBlahA
+#   - name: ProjectName
+#     displayName: Project Name
+#     type: string
+#     default: Disco Labs
+#   - name: VersionId
+#     displayName: Version Number (e.g "v1")
+#     type: string
+#     default: v2
+#   - name: Param
+#     displayName: Param
+#     type: object
+#     default:
+#     - name: 'john'
+#       email: 'john@doe.com'
+#     - name: 'jane'
+#       email: 'jane@doe.com'
+#     - bob
 
 # pool:
 #   vmImage: ubuntu-latest
