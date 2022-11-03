@@ -18,8 +18,8 @@ parameters:
   - name: myParameter
     type: object
     values:
-        name1: value1
-        name2: value2
+      - name1: value1
+      - name2: value2
 
 # parameters:
 #   - name: ProjectKey
