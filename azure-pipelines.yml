@@ -57,19 +57,26 @@ stages:
   jobs:
   - job: A
     steps:
-    - bash: |
-       echo "${{ convertToJson(parameters.myParameter) }}"
-       echo "##vso[task.setvariable variable=skipsubsequent;isOutput=true]hello world"
-      name: skipstep
+      - bash: |
+          node=$(echo "design123 | node" | cut -d '|' -f2 | sed 's/ *//g');
+          echo DESIGN NODE ISSSS $node
+          echo ##vso[task.setvariable variable=design_node;isOutput=true;]Hello
+        name: Assign_Design_Node
+      - bash: echo DESIGNNODE IS 123 $(design_node)
+    # steps:
+    # - bash: |
+    #    echo "${{ convertToJson(parameters.myParameter) }}"
+    #    echo "##vso[task.setvariable variable=skipsubsequent;isOutput=true]hello world"
+    #   name: skipstep
 
-- stage: two
-  jobs:
-  - job: B
-    variables:
-      - name: skipMe
-        value: $[ stageDependencies.one.A.outputs['skipstep.skipsubsequent'] ]
-    steps:
-      - bash: echo $(skipMe)
+# - stage: two
+#   jobs:
+#   - job: B
+#     variables:
+#       - name: skipMe
+#         value: $[ stageDependencies.one.A.outputs['skipstep.skipsubsequent'] ]
+#     steps:
+#       - bash: echo $(skipMe)
 
 
 # stages:
