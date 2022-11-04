@@ -59,14 +59,28 @@ stages:
   - job: A
     steps:
     - bash: |
-        node=$(echo "design123 | node" | cut -d '|' -f2 | sed 's/ *//g');echo "##vso[task.setvariable variable=myJobVar]$node"
+        node1=$(echo "design123 | some_node" | cut -d '|' -f2 | sed 's/ *//g');echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]$node1"
+      name: passOutput
+  - job: B
+    dependsOn: A
+    variables:
+      myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
+    steps:
     - bash: |
-        node1=$(echo "design123 | some_node" | cut -d '|' -f2 | sed 's/ *//g');echo "##vso[task.setvariable variable=myOutputJobVar;isoutput=true]$node1"
-      name: setOutput
-    - bash: |
-        echo $(myJobVar) 
-    - bash: |
-        echo $(setOutput.myOutputJobVar)
+        echo $(myVarFromJobA)
+
+  # jobs:
+  # - job: A
+  #   steps:
+  #   - bash: |
+  #       node=$(echo "design123 | node" | cut -d '|' -f2 | sed 's/ *//g');echo "##vso[task.setvariable variable=myJobVar]$node"
+  #   - bash: |
+  #       node1=$(echo "design123 | some_node" | cut -d '|' -f2 | sed 's/ *//g');echo "##vso[task.setvariable variable=myOutputJobVar;isoutput=true]$node1"
+  #     name: setOutput
+  #   - bash: |
+  #       echo $(myJobVar) 
+  #   - bash: |
+  #       echo $(setOutput.myOutputJobVar)
   # - job: A
   #   # steps:
   #   # - bash: |
@@ -92,9 +106,9 @@ stages:
   - job: B
     variables:
       - name: skipMe
-        #value: "ok"
+        value: "ok"
         #value: $[ stageDependencies.one.A.outputs['skipstep.skipsubsequent'] ]
-        value: $[ stageDependencies.one.A.outputs['setOutput.myOutputJobVar'] ]
+        # value: $[ stageDependencies.one.A.outputs['setOutput.myOutputJobVar'] ]
     steps:
       - bash: echo $(skipMe)
 
