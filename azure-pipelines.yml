@@ -14,12 +14,12 @@ variables:
   # key2: "Right"
   # key3: "Buzz"
 
-parameters:
-  - name: myParameter
-    type: object
-    values:
-      - name1: value1
-      - name2: value2
+# parameters:
+#   - name: myParameter
+#     type: object
+#     values:
+#       - name1: value1
+#       - name2: value2
 
 # parameters:
 #   - name: ProjectKey
