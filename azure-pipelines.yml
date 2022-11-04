@@ -92,8 +92,9 @@ stages:
   - job: B
     variables:
       - name: skipMe
-        value: "ok"
+        #value: "ok"
         #value: $[ stageDependencies.one.A.outputs['skipstep.skipsubsequent'] ]
+        value: $[ stageDependencies.one.A.outputs['setOutput.myOutputJobVar'] ]
     steps:
       - bash: echo $(skipMe)
 
