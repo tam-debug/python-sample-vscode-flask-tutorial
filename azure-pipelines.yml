@@ -64,7 +64,9 @@ stages:
   - job: B
     dependsOn: A
     variables:
-      myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
+      - name: myVarFromJobA
+        value: $[ dependencies.A.outputs['passOutput.myOutputVar'] ] 
+      # myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
     steps:
     - bash: |
         echo $(myVarFromJobA)
