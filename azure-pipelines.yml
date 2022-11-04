@@ -69,9 +69,11 @@ stages:
       # - bash: echo DESIGNNODE IS 123 $(design_node)
     steps:
     - bash: |
-       echo "##vso[task.setvariable variable=skipsubsequent;isOutput=true]hello world"
+       echo "##vso[task.setvariable variable=skipsubsequent;isOutput=true]hello world";
        echo $(skipsubsequent)
       name: skipstep
+    - bash: |
+        echo $(skipsubsequent)
 
 - stage: two
   jobs:
