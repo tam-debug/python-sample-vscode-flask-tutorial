@@ -58,9 +58,8 @@ stages:
   jobs:
   - job: A
     steps:
-    - bash: node=$(echo "design123 | node" | cut -d '|' -f2 | sed 's/ *//g');
     - bash: |
-        echo "##vso[task.setvariable variable=myJobVar]$node"
+        node=$(echo "design123 | node" | cut -d '|' -f2 | sed 's/ *//g');echo "##vso[task.setvariable variable=myJobVar]$node"
     - bash: |
         echo "##vso[task.setvariable variable=myOutputJobVar;isoutput=true]this is the same job too"
       name: setOutput
