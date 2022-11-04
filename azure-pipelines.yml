@@ -57,10 +57,10 @@ stages:
   jobs:
   - job: A
     steps:
-      - bash: |
-          SOMEVALUE="bleh"
-          echo "##vso[task.setvariable variable=someName;isOutput=true;]$SOMEVALUE"
-          echo "variable value is $(someName)"
+    - bash: |
+        SOMEVALUE="bleh"
+        echo "##vso[task.setvariable variable=someName;isOutput=true;]$SOMEVALUE"
+        echo "variable value is $(someName)"
       # - bash: |
       #     node=$(echo "design123 | node" | cut -d '|' -f2 | sed 's/ *//g');
       #     echo DESIGN NODE ISSSS $node
