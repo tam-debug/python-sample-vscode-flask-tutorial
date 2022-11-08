@@ -21,7 +21,10 @@ variables:
 #       - name1: value1
 #       - name2: value2
 
-# parameters:
+parameters:
+  - name: my_param
+    type: string
+    default: A variable
 #   - name: ProjectKey
 #     displayName: Project Key
 #     type: string
@@ -56,20 +59,23 @@ stages:
 - stage: one
 
   jobs:
-  - job: A
-    steps:
-    - bash: |
-        node1=$(echo "design123 | some_node" | cut -d '|' -f2 | sed 's/ *//g');echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]$node1"
-      name: passOutput
-  - job: B
-    dependsOn: A
-    variables:
-      - name: myVarFromJobA
-        value: $[ dependencies.A.outputs['passOutput.myOutputVar'] ] 
-      # myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
-    steps:
-    - bash: |
-        echo $(myVarFromJobA)
+    - job: A
+      steps:
+      - bash: echo $(${{ parameters.my_param }})
+  # - job: A
+  #   steps:
+  #   - bash: |
+  #       node1=$(echo "design123 | some_node" | cut -d '|' -f2 | sed 's/ *//g');echo "##vso[task.setvariable variable=myOutputVar;isoutput=true]$node1"
+  #     name: passOutput
+  # - job: B
+  #   dependsOn: A
+  #   variables:
+  #     - name: myVarFromJobA
+  #       value: $[ dependencies.A.outputs['passOutput.myOutputVar'] ] 
+  #     # myVarFromJobA: $[ dependencies.A.outputs['passOutput.myOutputVar'] ]  
+  #   steps:
+  #   - bash: |
+  #       echo $(myVarFromJobA)
 
   # jobs:
   # - job: A
