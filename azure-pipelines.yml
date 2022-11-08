@@ -7,8 +7,11 @@ trigger:
 - master
 
 variables:
-  - name: "A variable"
-    value: "Some value"
+  a_variable:
+    green: "ok"
+# variables:
+#   - name: "A variable"
+#     value: "Some value"
   # - template: "some template"
   # key1: "Ok"
   # key2: "Right"
